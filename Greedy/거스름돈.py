@@ -1,3 +1,4 @@
+#boj 5585
 x=int(input())
 x=1000-x
 count=0
