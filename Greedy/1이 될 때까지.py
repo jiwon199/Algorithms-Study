@@ -1,0 +1,15 @@
+#이코테 99p 그리디 실전문제3
+n,k=list(map(int,input().split()))
+
+count=0
+while True:
+  if n==1:
+    break
+
+  if n%k==0:
+    n=n//k
+  else:
+    n-=1
+  count+=1
+
+print(count)
