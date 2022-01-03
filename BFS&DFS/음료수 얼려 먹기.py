@@ -24,7 +24,6 @@ graph=[]
 for i in range(n):
   graph.append(list(map(int,input())))
 
-#0은 false, 1은 true
 # 모든 노드(위치)에 대하여 음료수 채우기
 result = 0
 for i in range(n):
