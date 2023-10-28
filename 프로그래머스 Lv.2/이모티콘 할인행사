@@ -1,0 +1,60 @@
+import java.util.*;
+class Solution {
+        static List <int []> res=new ArrayList<>();
+        static int[] target = new int[] { 10, 20, 30 ,40};
+        static int[] persent ;
+
+
+        static int n;
+        public int[] solution(int[][] users, int[] emoticons) {
+
+            n=emoticons.length;
+            persent=new int[n];
+            permutation(0,users,emoticons);
+            Collections.sort(res,(o1, o2) -> {
+            return o1[0]!=o2[0] ? o2[0]-o1[0] : o2[1]-o1[1];
+            });
+            
+            
+            return res.get(0);
+        }
+        private static void permutation(int cnt,int[][] users, int[] emoticons) {
+            if (cnt == n) {
+                getResult(users,emoticons);
+                return;
+            }
+            for (int i = 0; i < 4; i++) {
+                persent[cnt] = target[i];
+                permutation(cnt + 1,users,emoticons);
+            }
+        }
+        public static void getResult(int [][] users,int [] emoticons) {
+            int totalPrice = 0;
+            int totalPlus = 0;
+            for (int[] user : users) {
+                int[] info = getResultPerPerson(user, emoticons);
+                totalPrice += info[0];
+                totalPlus += info[1];
+            }
+             
+            res.add(new int[]{totalPlus, totalPrice});
+
+
+        }
+        public static int [] getResultPerPerson(int [] user,int [] emoticons){
+            int price=0;
+            int isPlus=0;
+
+            for(int i=0;i<n;i++){
+                if(persent[i]>=user[0]){
+                    price+= (int) ((100-persent[i])*0.01*emoticons[i]);
+                }
+            }
+            if(price>=user[1]){
+                price=0;
+                isPlus=1;
+            }
+            return new int [] {price,isPlus};
+        }
+
+    }
